@@ -1,0 +1,218 @@
+//Reset
+* {
+  margin: 0;
+  padding: 0;
+}
+
+//Estilos generales
+$colorBase: #141414;
+
+body {
+  font-family: "Jost", sans-serif;
+  background-color: $colorBase;
+  color: white;
+}
+
+//Cabecera
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 10em;
+  background-color: $colorBase;
+  display: flex;
+  align-items: center;
+
+  //Logo
+  .header-logo {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+
+    //Titulo logo
+    .platform-title {
+      width: 50%;
+      text-align: left;
+      margin: 0 auto;
+
+      font: {
+        size: 1.5em;
+        weight: 200;
+      }
+
+      //Responsive Tablet/Mobile
+      @media screen and (max-width: 1279px) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  //Botones
+  .header-buttons {
+    width: 75%;
+    display: flex;
+    justify-content: flex-end;
+
+    div {
+      margin-right: 2.5em;
+      padding: 1em;
+
+      //Responsive Desktop
+      @media screen and (min-width: 1280px) {
+        &:hover {
+          background-color: white;
+          color: blue;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      }
+
+      //Responsive Movil
+      @media screen and (max-width: 780px) {
+        margin-right: 1.5em;
+        padding: 0;
+      }
+    }
+  }
+}
+
+//Mixin para formatear el layaout de las peliculas mas populares
+//Mostraremos 5 peliculas en formato desktop y 3 peliculas en tablet/mobile
+@mixin formatearTopPeliculas() {
+  //No mostramos la pelicula 4 y 5
+  @for $i from 0 through 2 {
+    .top-item:nth-child(#{$i}) {
+      visibility: hidden;
+      width: 0%;
+    }
+  }
+
+  //Damos anchura a las peliculas que si mostramos
+  @for $i from 3 through 5 {
+    //Responsive Tablet -> Desktop
+    @media screen and (max-width: 1279px) {
+      .top-item:nth-child(#{$i}) {
+        width: 33.3%;
+      }
+    }
+
+    //Responsive Tablet
+    @media screen and (max-width: 780px) {
+      .top-item:nth-child(#{$i}) {
+        width: 40%;
+      }
+    }
+
+    //Responsive Mobile
+    @media screen and (max-width: 480px) {
+      .top-item:nth-child(#{$i}) {
+        width: 80%;
+      }
+    }
+  }
+}
+
+//Menu de peliculas
+main {
+  margin-top: 10em;
+  .section-title {
+    padding: {
+      left: 1em;
+      top: 1em;
+    }
+    //Responsive Movil
+    @media screen and (max-width: 780px) {
+      font-size: 1.5em;
+    }
+
+    //Añadir cantidad de peliculas que estamos mostrando
+    #top-text::before {
+      content: "5";
+      font-weight: bold;
+
+      //Responsive Tablet/Mobile
+      @media screen and (max-width: 1279px) {
+        content: "3";
+      }
+    }
+  }
+
+  //Peliculas
+  section {
+    padding: {
+      left: 1em;
+      right: 1em;
+      top: 0.2em;
+    }
+  }
+
+  //Mejores peliculas
+  .top {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    div {
+      //Responsive Desktop
+      @media screen and (min-width: 1280px) {
+        width: 20%;
+      }
+      img {
+        width: 100%;
+      }
+    }
+    //Responsive Tablet/Movil
+    @media screen and (max-width: 1279px) {
+      @include formatearTopPeliculas();
+    }
+  }
+
+  //Peliculas por secciones
+  .first,
+  .second {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5em;
+    justify-content: space-around;
+
+    //Responsive Tablet/Mobile
+    @media screen and (max-width: 1279px) {
+      flex-wrap: wrap;
+      height: auto;
+    }
+
+    div {
+      margin-right: 0.2em;
+
+      //Responsive Desktop
+      @media screen and (min-width: 1280px) {
+        width: 16.6%;
+        transition: width 2s ease;
+        &:hover {
+          width: 25%;
+          cursor: pointer;
+        }
+      }
+
+      //Responsive Tablet -> Desktop
+      @media screen and (max-width: 1279px) {
+        width: 30%;
+      }
+
+      //Responsive Tablet
+      @media screen and (max-width: 870px) {
+        width: 48%;
+      }
+
+      //Responsive Movil
+      @media screen and (max-width: 480px) {
+        width: 90%;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

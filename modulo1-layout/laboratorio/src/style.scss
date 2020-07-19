@@ -1,0 +1,315 @@
+//Reset
+* {
+  margin: 0;
+  padding: 0;
+}
+
+//Contenedor principal
+#container-general {
+  text-align: center;
+
+  & > h1 {
+    color: #d9d900;
+    padding: 2em;
+    text-decoration: underline;
+  }
+}
+
+//Estilos generales para los ejercicios
+.ejercicio {
+  //Volvemos a poner el texto en su lugar
+  text-align: initial;
+  width: 90%;
+
+  //Centramos el contenido
+  margin: 0 auto;
+
+  .enunciado {
+    h2 {
+      padding: 0.5em;
+      text-decoration: underline;
+    }
+
+    p,
+    ul {
+      margin: {
+        left: 2em;
+        right: 0.5em;
+      }
+      font: {
+        size: 20px;
+      }
+      color: grey;
+    }
+    ul {
+      margin-left: 4em;
+    }
+  }
+  .resultado {
+    margin: {
+      top: 3em;
+      left: 2em;
+      right: 2em;
+      bottom: 3em;
+    }
+  }
+}
+
+//----------------------------------------------------------------------------
+
+//Ejercicio 1
+#container-0 {
+  width: 70%;
+  margin: 0 auto;
+
+  //Responsive
+  @media screen and (max-width: 890px) {
+    width: 30%;
+  }
+}
+
+.container-1,
+.container-2,
+.container-3 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 1.5fr repeat(4, 1fr);
+  grid-template-rows: 6em;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+
+  //Responsive
+  @media screen and (max-width: 890px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, 3em);
+    margin: 0 auto;
+    margin-bottom: 2em;
+  }
+}
+
+.box {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  border-radius: 10px;
+}
+
+//Mixin para hacer la paleta de colores por fila
+@mixin paleta($colorBase) {
+  $color: $colorBase;
+
+  .base-color {
+    background-color: $color;
+    color: white;
+  }
+
+  //Agregamos los mixin para hacer los efectos
+  @include oscurecer($color);
+  @include aclarar($color);
+}
+
+//Mixin para oscurecer
+@mixin oscurecer($color) {
+  //Con un for creamos la regla para cada clase
+  @for $i from 1 through 4 {
+    .darken-#{$i} {
+      background-color: darken($color, ($i * 5) + 5%);
+      color: complement($color);
+    }
+  }
+}
+
+//Mixin para aclarar
+@mixin aclarar($color) {
+  //Con un for creamos la regla para cada clase
+  @for $i from 1 through 4 {
+    .lighten-#{$i} {
+      background-color: lighten($color, ($i * 5) + 5%);
+      color: complement($color);
+    }
+  }
+}
+
+.container-1 {
+  //Agregamos el mixin
+  @include paleta(#f44336);
+}
+
+.container-2 {
+  //Agregamos el mixin
+  @include paleta(#3f51b5);
+}
+
+.container-3 {
+  //Agregamos el mixin
+  @include paleta(#4caf50);
+}
+
+//----------------------------------------------------------------------------
+
+//Ejercicio 2
+#temas {
+  //Incluimos el tema
+  @import "theme-B.scss";
+
+  //Centramos el contenido
+  margin: 0 auto;
+
+  width: 150px;
+  margin-bottom: 1em;
+
+  div {
+    padding: 1em;
+    height: 4vh;
+    width: 100px;
+    border: 1px solid grey;
+    font-weight: bold;
+    font-family: Comic Sans MS;
+    border-radius: $radius;
+  }
+
+  #base {
+    background-color: $base;
+  }
+
+  #important {
+    background-color: $important;
+  }
+
+  #warning {
+    background-color: $warning;
+  }
+
+  > span {
+    p {
+      &:first-child {
+        font-family: $principal-font;
+      }
+      &:last-child {
+        font-family: $secondary-font;
+      }
+      margin: {
+        top: 1em;
+        bottom: 1em;
+      }
+    }
+  }
+
+  #box-shadow {
+    box-shadow: $box-shadow;
+  }
+}
+
+//----------------------------------------------------------------------------
+
+//Ejercicio 3
+#barra-nav {
+  background-color: #006a7b;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5em;
+
+  h3 {
+    margin-bottom: 1em;
+  }
+
+  div {
+    padding: 0.5em;
+    color: white;
+
+    &:hover {
+      background-color: #2f4858;
+      cursor: pointer;
+    }
+  }
+  //Responsive
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+//----------------------------------------------------------------------------
+
+//Ejercicio 4
+#container-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 25%);
+  grid-template-rows: auto;
+  justify-content: space-around;
+  row-gap: 3em;
+  background-color: #eeeeee;
+  font-family: "Segoe UI";
+
+  //Responsive
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: repeat(2, 40%);
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(1, 70%);
+  }
+
+  .card {
+    margin: {
+      top: 1em;
+      bottom: 1em;
+    }
+  }
+
+  .img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .cuerpo {
+    padding: {
+      right: 0.5em;
+      left: 0.5em;
+      bottom: 1em;
+    }
+
+    border: 1px solid #a8a8a8;
+    background-color: white;
+
+    h2 {
+      margin: {
+        top: 1em;
+        bottom: 1em;
+      }
+    }
+
+    > p:not(.publicacion) {
+      margin-bottom: 1.5em;
+    }
+
+    .publicacion {
+      text-align: right;
+      .negrita {
+        font-weight: bold;
+        text-align: right;
+      }
+      .fecha {
+        color: #8ac68f;
+      }
+    }
+
+    .info {
+      background-color: #7bbe46;
+      text-align: center;
+      font-weight: b;
+      color: white;
+      padding: 0.5em;
+      margin-top: 1em;
+    }
+  }
+}

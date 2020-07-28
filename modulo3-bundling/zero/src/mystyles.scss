@@ -1,0 +1,25 @@
+$color: pink;
+h1 {
+  background-color: $color;
+  text-align: center;
+  padding: 1em;
+}
+
+img {
+  display: block;
+  width: 100px;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 20% 50% 20%;
+  column-gap: 2em;
+  justify-items: center;
+  align-items: center;
+}
+
+#imgContainer {
+  img {
+    width: 300px;
+  }
+}

@@ -1,0 +1,16 @@
+$color: pink;
+h1 {
+  background-color: $color;
+}
+
+div {
+  div {
+    margin: 2em;
+    float: left;
+  }
+
+  img {
+    display: block;
+    width: 200px;
+  }
+}

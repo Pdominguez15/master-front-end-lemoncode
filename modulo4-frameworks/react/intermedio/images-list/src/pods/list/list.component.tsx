@@ -1,7 +1,7 @@
 import React from "react";
 
 //Modelo
-import { Article } from "./article.vm";
+import { Article } from "./list.vm";
 
 //Componente
 import { CardContainer } from "pods/card";

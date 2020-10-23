@@ -12,3 +12,8 @@ export interface Article {
   title: string;
   image: string;
 }
+
+export interface LinkVM {
+  to: string;
+  category: string;
+}

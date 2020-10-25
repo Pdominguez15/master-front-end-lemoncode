@@ -6,6 +6,9 @@ import { MemberEntity } from "./members-list.vm";
 //Componente
 import { MembersListComponent } from "./members-list.component";
 
+//Cabecera de la tabla
+const headerList = ["Avatar", "ID", "Name"];
+
 export const ListMembersContainer: React.FunctionComponent = () => {
   //Search
   const [company, setCompany] = React.useState("lemoncode");
@@ -32,6 +35,7 @@ export const ListMembersContainer: React.FunctionComponent = () => {
   return (
     <>
       <MembersListComponent
+        headerList={headerList}
         company={company}
         onSearch={handleSearch}
         membersList={membersList}

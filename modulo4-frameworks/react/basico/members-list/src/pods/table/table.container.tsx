@@ -11,14 +11,15 @@ const headsList = ["Avatar", "ID", "Name"];
 
 interface Props {
   membersList: MemberEntity[];
+  headerList: string[];
 }
 
 export const TableContainer: React.FC<Props> = (props) => {
   //Props
-  const { membersList } = props;
+  const { headerList, membersList } = props;
   return (
     <>
-      <TableComponent headsList={headsList} memberList={membersList} />
+      <TableComponent headerList={headerList} membersList={membersList} />
     </>
   );
 };

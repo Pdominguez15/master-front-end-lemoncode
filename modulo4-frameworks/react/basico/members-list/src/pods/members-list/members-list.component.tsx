@@ -12,6 +12,7 @@ import { TableContainer } from "../table";
 import * as classes from "./members-list.styles";
 
 interface Props {
+  headerList: string[];
   company: string;
   onSearch: (membersList: MemberEntity[], companyFilter) => void;
   membersList: MemberEntity[];
@@ -20,13 +21,13 @@ interface Props {
 }
 
 export const MembersListComponent: React.FunctionComponent<Props> = (props) => {
-  const { company, onSearch, membersList, date, open } = props;
+  const { headerList, company, onSearch, membersList, date, open } = props;
 
   return (
     <>
       <div id="container" className={classes.container}>
         <SearchContainer onSearch={onSearch} company={company} />
-        <TableContainer membersList={membersList} />
+        <TableContainer headerList={headerList} membersList={membersList} />
         <SnackbarContainer key={date} open={open} companyFilter={company} />
       </div>
     </>

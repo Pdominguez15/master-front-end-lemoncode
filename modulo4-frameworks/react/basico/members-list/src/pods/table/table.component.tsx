@@ -26,27 +26,22 @@ const useStyles = makeStyles({
 interface Props {
   headerList: string[];
   membersList: MemberEntity[];
+  rowsPerPage: number;
+  page: number;
+  onchangePage: (event: any, page: number) => void;
+  onchangeRowsPerPage: (event: any) => void;
 }
 
 export const TableComponent: React.FC<Props> = (props) => {
   //Props
-  const { headerList, membersList } = props;
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  React.useEffect(() => {
-    setPage(0);
-  }, [membersList]);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  const {
+    headerList,
+    membersList,
+    rowsPerPage,
+    page,
+    onchangePage,
+    onchangeRowsPerPage,
+  } = props;
 
   //CSS para sobreescribir en los componentes
   const classes = useStyles();
@@ -66,8 +61,8 @@ export const TableComponent: React.FC<Props> = (props) => {
           membersList={membersList}
           rowsPerPage={rowsPerPage}
           page={page > 0 && membersList.length === rowsPerPage ? 0 : page}
-          onchangePage={handleChangePage}
-          onchangeRowsPerPage={handleChangeRowsPerPage}
+          onchangePage={onchangePage}
+          onchangeRowsPerPage={onchangeRowsPerPage}
         />
       </Table>
     </TableContainer>

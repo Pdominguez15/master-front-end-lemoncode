@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div [ngClass]="'img'" (click)="redirect()">
+      <img src="assets/lemoncode.png" width="100px" />
+    </div>
+    <div *ngIf="userLogged()" [ngClass]="'user'">
+      <div>
+        <mat-icon (click)="logout()">exit_to_app</mat-icon>
+      </div>
+      <p>Bienvenido, {{ getName() }}</p>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

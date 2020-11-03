@@ -1,0 +1,24 @@
+.img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.user {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+
+  p {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

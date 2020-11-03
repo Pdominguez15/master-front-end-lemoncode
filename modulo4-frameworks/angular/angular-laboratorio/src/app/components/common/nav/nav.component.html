@@ -1,0 +1,26 @@
+<div *ngIf="!userLogged()">
+  <button mat-button routerLink="/home" routerLinkActive="selected">
+    Home
+  </button>
+  <button mat-button routerLink="/login" routerLinkActive="selected">
+    Login
+  </button>
+  <button mat-button routerLink="/acerca-de" routerLinkActive="selected">
+    Acerca de
+  </button>
+</div>
+
+<div *ngIf="userLogged()">
+  <button mat-button routerLink="/dashboard" routerLinkActive="selected">
+    Dashboard
+  </button>
+  <button mat-button routerLink="/galeria" routerLinkActive="selected">
+    Galeria
+  </button>
+  <button mat-button routerLink="/crud" routerLinkActive="selected">
+    CRUD
+  </button>
+  <button mat-button routerLink="/profile" routerLinkActive="selected">
+    Profile
+  </button>
+</div>

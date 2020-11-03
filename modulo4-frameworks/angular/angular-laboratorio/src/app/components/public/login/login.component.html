@@ -1,0 +1,55 @@
+<div [ngClass]="'container'">
+  <mat-card [ngClass]="'card'">
+    <h1>Login</h1>
+
+    <form #myForm="ngForm" (ngSubmit)="login()">
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input
+          matInput
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          (focus)="focus()"
+          required
+          #inputUsername="ngModel"
+        />
+        <mat-error *ngIf="inputUsername.invalid && inputUsername.touched"
+          >El usuario es obligatorio.</mat-error
+        >
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          (focus)="focus()"
+          required
+          #inputPassword="ngModel"
+        />
+        <mat-error *ngIf="inputPassword.invalid && inputPassword.touched"
+          >La contraseña es obligatoria.</mat-error
+        >
+      </mat-form-field>
+
+      <br />
+      <mat-error *ngIf="loginInvalid">
+        Usuario y contraseña incorrectos.
+      </mat-error>
+      <br />
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="myForm.invalid"
+      >
+        Entrar
+      </button>
+    </form>
+  </mat-card>
+</div>

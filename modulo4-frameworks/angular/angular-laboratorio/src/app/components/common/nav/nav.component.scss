@@ -1,0 +1,17 @@
+div {
+  background-color: #242415;
+  color: #ffffff;
+
+  button {
+    font-weight: 400;
+
+    &:hover {
+      color: #d9d900;
+      background-color: #404046;
+    }
+  }
+}
+
+.selected {
+  color: #d9d900;
+}

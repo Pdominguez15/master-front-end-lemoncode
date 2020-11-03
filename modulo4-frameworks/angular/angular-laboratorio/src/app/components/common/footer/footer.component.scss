@@ -1,0 +1,15 @@
+.footer {
+  flex: 0;
+  text-align: center;
+
+  p {
+    font-size: 10px;
+    white-space: normal;
+    margin-top: 10px;
+  }
+  mat-toolbar-row {
+    @media (max-width: 599px) {
+      height: 70px;
+    }
+  }
+}

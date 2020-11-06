@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    if (this.user.id != "" && this.user.name != "") {
+    if (this.user.id !== "" && this.user.name !== "") {
       return true;
     } else {
       return false;

@@ -9,7 +9,7 @@ import { LoginComponent } from "./components/public/login/login.component";
 //Componentes privados
 import { CrudComponent } from "./components/private/crud/crud.component";
 import { DashboardComponent } from "./components/private/dashboard/dashboard.component";
-import { GaleriaComponent } from "./components/private/galeria/galeria.component";
+import { GaleriaComponent } from "./components/private/galeria/galeria/galeria.component";
 import { ProfileComponent } from "./components/private/profile/profile.component";
 
 //Guards

@@ -1,0 +1,40 @@
+<div [ngClass]="'controls'">
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="isFirst()"
+    (click)="previous()"
+  >
+    Anterior
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="isLast()"
+    (click)="next()"
+  >
+    Siguiente
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="isMaximun()"
+    (click)="toIncrease()"
+  >
+    Aumentar
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="isMinimun()"
+    (click)="toDecrease()"
+  >
+    Disminuir
+  </button>
+  <button mat-raised-button color="warn" *ngIf="!playGalery" (click)="play()">
+    Play
+  </button>
+  <button mat-raised-button color="warn" *ngIf="playGalery" (click)="play()">
+    Stop
+  </button>
+</div>

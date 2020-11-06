@@ -18,11 +18,13 @@ import { FooterComponent } from "./components/common/footer/footer.component";
 //Componentes publicos
 import { HomeComponent } from "./components/public/home/home.component";
 import { LoginComponent } from "./components/public/login/login.component";
+import { GaleriaComponent } from "./components/private/galeria/galeria/galeria.component";
+import { ControlesComponent } from "./components/private/galeria/controles/controles.component";
+import { ImagesComponent } from "./components/private/galeria/images/images.component";
 import { AcercaDeComponent } from "./components/public/acerca-de/acerca-de.component";
 
 //Componentes privados
 import { DashboardComponent } from "./components/private/dashboard/dashboard.component";
-import { GaleriaComponent } from "./components/private/galeria/galeria.component";
 import { CrudComponent } from "./components/private/crud/crud.component";
 import { ProfileComponent } from "./components/private/profile/profile.component";
 
@@ -48,6 +50,8 @@ import { MatIconModule } from "@angular/material/icon";
     GaleriaComponent,
     CrudComponent,
     ProfileComponent,
+    ControlesComponent,
+    ImagesComponent,
   ],
   imports: [
     BrowserModule,

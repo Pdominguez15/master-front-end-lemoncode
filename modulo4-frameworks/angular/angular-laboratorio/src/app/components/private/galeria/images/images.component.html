@@ -1,0 +1,16 @@
+<div [ngClass]="'selected'">
+  <div [ngStyle]="getWidth()">
+    <img [src]="getImageSelected().src" [title]="getImageSelected().title" />
+  </div>
+</div>
+<div [ngClass]="'galery'">
+  <ng-container *ngFor="let image of getImageList()">
+    <div [ngClass]="{ imageSelected: image.id === getImageSelected().id }">
+      <img
+        [src]="image.src"
+        [title]="image.title"
+        (click)="changeImageSelected(image.id)"
+      />
+    </div>
+  </ng-container>
+</div>

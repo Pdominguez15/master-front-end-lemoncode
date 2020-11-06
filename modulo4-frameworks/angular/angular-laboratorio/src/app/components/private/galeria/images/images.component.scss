@@ -1,0 +1,37 @@
+.selected {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2em;
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 400px;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+
+.galery {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  div {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    padding: 1em;
+  }
+  img {
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+.imageSelected {
+  border-bottom: 1px solid gold;
+}

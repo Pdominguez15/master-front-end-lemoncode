@@ -1,36 +1,54 @@
 <template>
-  <table class="table">
-    <header-component />
-    <tbody>
-      <template v-for="recipe in recipes">
-        <row-component :key="recipe.id" :recipe="recipe" />
-      </template>
-    </tbody>
-  </table>
+  <div>
+    <v-text-field
+      v-model="search"
+      append-icon="mdi-magnify"
+      label="Search"
+    ></v-text-field>
+    <v-card-text>
+      <v-data-table
+        :headers="headers"
+        :items="recipes"
+        :search="search"
+        :class="$style.table"
+      >
+        <template v-slot:[`item.controls`]="{ item }">
+          <v-icon small class="mr-2" @click="edit(item.id)">mdi-pencil</v-icon>
+        </template>
+      </v-data-table>
+    </v-card-text>
+  </div>
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from "vue";
-import { Recipe } from "../viewModel";
-import HeaderComponent from "./Header.vue";
-import RowComponent from "./Row.vue";
+import Vue, { PropOptions, VueConstructor } from "vue";
+import { baseRoutes } from "../../../../router";
+import { Recipe, Header } from "../viewModel";
 
-export default Vue.extend({
+export default (Vue as VueConstructor<Vue & { $style }>).extend({
   name: "TableComponent",
-  components: { HeaderComponent, RowComponent },
+  data() {
+    return {
+      search: "",
+    };
+  },
   props: {
+    headers: { required: true } as PropOptions<Header[]>,
     recipes: { required: true } as PropOptions<Recipe[]>,
+  },
+  methods: {
+    edit(id) {
+      this.$router.push({ path: `${baseRoutes.recipe}/${id}` });
+    },
   },
 });
 </script>
 
-<style scoped>
-.table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.table tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.05);
+<style module>
+.table tr td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

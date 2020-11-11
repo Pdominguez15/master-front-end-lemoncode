@@ -1,5 +1,6 @@
 <template>
   <app-layout>
+    <v-img height="250" :src="recipe.image"></v-img>
     <form-component v-bind="$props" />
   </app-layout>
 </template>
@@ -15,7 +16,7 @@ export default Vue.extend({
   components: { AppLayout, FormComponent },
   props: {
     recipe: { require: true },
-    recipeError: { required: true },    
+    recipeError: { required: true },
     onUpdateRecipe: { require: true },
     onSave: { require: true },
     onRemoveIngredient: { required: true },

@@ -18,7 +18,9 @@ export default Vue.extend({
   components: { IngredientRowComponent },
   props: {
     ingredients: { required: true } as PropOptions<string[]>,
-    onRemoveIngredient: { required: true } as PropOptions<(ingredient: string) => void>,
+    onRemoveIngredient: { required: true } as PropOptions<
+      (ingredient: string) => void
+    >,
   },
 });
 </script>

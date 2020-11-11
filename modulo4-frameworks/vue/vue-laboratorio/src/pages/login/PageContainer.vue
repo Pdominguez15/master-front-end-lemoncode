@@ -1,5 +1,12 @@
 <template>
-  <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+  <div>
+    <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+    <snackbar
+      :open="openSnackbar"
+      :message="messageErrorLogin"
+      :onClose="closeModal"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,46 +17,45 @@ import LoginPage from "./Page.vue";
 import { createEmptyLogin, Login, createEmptyLoginError } from "./viewModel";
 import { mapLoginVMToModel } from "./mapper";
 import { validation } from "./validations";
+import { Snackbar } from "../../common/components/";
 
 export default Vue.extend({
   name: "PageLoginContainer",
-  components: { LoginPage },
+  components: { LoginPage, Snackbar },
   data() {
     return {
       login: createEmptyLogin(),
-      loginError: createEmptyLoginError()
+      loginError: createEmptyLoginError(),
+      openSnackbar: false,
+      messageErrorLogin: "Usuario y contraseña incorrectos.",
     };
   },
   methods: {
     updateLogin(field: string, value: string) {
       this.login = {
         ...this.login,
-        [field]: value
+        [field]: value,
       };
 
-      validation.validateField(field, value).then(result => {
+      validation.validateField(field, value).then((result) => {
         this.loginError = {
           ...this.loginError,
-          [field]: result
+          [field]: result,
         };
       });
     },
     loginRequest() {
-      validation.validateForm(this.login).then(result => {
+      this.openSnackbar = false;
+      validation.validateForm(this.login).then((result) => {
         if (result.succeeded) {
-
           const loginModel = mapLoginVMToModel(this.login);
           loginRequest(loginModel)
             .then(() => {
               this.$router.push(baseRoutes.recipe);
             })
-            .catch(error =>
-              alert(
-                `Este mensaje debes implementarlo con el componente Snackbar de Vuetify ;) => ${error}`
-              )
-            );
-
-
+            .catch((error) => {
+              this.openSnackbar = true;
+            });
         } else {
           this.loginError = {
             ...this.loginError,
@@ -57,7 +63,10 @@ export default Vue.extend({
           };
         }
       });
-    }
-  }
+    },
+    closeModal() {
+      this.openSnackbar = false;
+    },
+  },
 });
 </script>

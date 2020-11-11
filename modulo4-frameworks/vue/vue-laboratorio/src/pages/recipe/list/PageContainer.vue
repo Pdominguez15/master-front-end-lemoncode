@@ -1,13 +1,12 @@
 <template>
-  <recipe-list-page v-bind="{ searchText, recipes: filteredRecipes, onSearch }" />
+  <recipe-list-page v-bind="{ headers, recipes: recipes }" />
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { fetchRecipes } from "../../../rest-api/api/recipe";
-import { filterRecipesByCommaSeparatedText } from "./business/filterRecipeBusiness";
 import { mapRecipeListModelToVm } from "./mapper";
-import { Recipe } from "./viewModel";
+import { Recipe, Header } from "./viewModel";
 import RecipeListPage from "./Page.vue";
 
 export default Vue.extend({
@@ -17,14 +16,19 @@ export default Vue.extend({
   },
   data() {
     return {
+      headers: [
+        { text: "Name ", value: "name", align: "center" },
+        { text: "Description ", value: "description", align: "center" },
+        {
+          text: "Controls ",
+          value: "controls",
+          filterable: false,
+          align: "center",
+        },
+      ] as Header[],
       recipes: [] as Recipe[],
       searchText: "",
     };
-  },
-  computed: {
-    filteredRecipes(): Recipe[] {
-      return filterRecipesByCommaSeparatedText(this.recipes, this.searchText);
-    },
   },
   created() {
     fetchRecipes()

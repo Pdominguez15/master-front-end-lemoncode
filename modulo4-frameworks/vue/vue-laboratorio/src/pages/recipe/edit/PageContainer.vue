@@ -1,14 +1,21 @@
 <template>
-  <recipe-edit-page
-    v-bind="{
-      recipe,
-      recipeError,
-      onUpdateRecipe,
-      onAddIngredient,
-      onSave,
-      onRemoveIngredient,
-    }"
-  />
+  <div>
+    <recipe-edit-page
+      v-bind="{
+        recipe,
+        recipeError,
+        onUpdateRecipe,
+        onAddIngredient,
+        onSave,
+        onRemoveIngredient,
+      }"
+    />
+    <snackbar
+      :open="openSnackbar"
+      :message="messageError"
+      :onClose="closeModal"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -19,23 +26,31 @@ import { mapRecipeModelToVm, mapRecipeVmToModel } from "./mapper";
 import { createEmptyRecipe, createEmptyRecipeError } from "./viewModel";
 import { validations } from "./validations";
 
+import { Snackbar } from "../../../common/components";
 export default Vue.extend({
   name: "RecipeEditPageContainer",
-  components: { RecipeEditPage },
+  components: { RecipeEditPage, Snackbar },
   props: { id: String },
   data() {
     return {
       recipe: createEmptyRecipe(),
       recipeError: createEmptyRecipeError(),
+      openSnackbar: false,
+      messageError: "",
     };
   },
   beforeMount() {
     const id = Number(this.id || 0);
+
+    this.openSnackbar = false;
     fetchRecipeById(id)
       .then((recipe) => {
         this.recipe = mapRecipeModelToVm(recipe);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        this.openSnackbar = true;
+        this.messageError = "Error al cargar la receta";
+      });
   },
   methods: {
     onUpdateRecipe(field: string, value: string) {
@@ -46,15 +61,18 @@ export default Vue.extend({
       this.validateRecipeField(field, value);
     },
     onSave() {
+      this.openSnackbar = false;
       validations.validateForm(this.recipe).then((result) => {
         if (result.succeeded) {
           const recipe = mapRecipeVmToModel(this.recipe);
           save(recipe)
             .then((message) => {
-              console.log(message);
               this.$router.back();
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              this.openSnackbar = true;
+              this.messageError = "Error al guardar la receta";
+            });
         } else {
           this.recipeError = {
             ...this.recipeError,
@@ -89,6 +107,9 @@ export default Vue.extend({
         ...this.recipeError,
         [field]: result,
       };
+    },
+    closeModal() {
+      this.openSnackbar = false;
     },
   },
 });

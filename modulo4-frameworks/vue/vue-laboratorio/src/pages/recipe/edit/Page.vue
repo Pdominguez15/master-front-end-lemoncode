@@ -8,8 +8,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { AppLayout } from "../../../common/layouts";
-import { FormProps } from "./formProps";
 import { FormComponent } from "./components";
+import { FormProps } from "./formProps";
 
 export default Vue.extend({
   name: "RecipeEditPage",

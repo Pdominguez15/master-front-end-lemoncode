@@ -11,13 +11,21 @@
 
 <script lang="ts">
 import Vue from "vue";
+//Api
 import { loginRequest } from "../../rest-api/api/login";
+
+//Router
 import { baseRoutes } from "../../router";
+
+//Componentes
 import LoginPage from "./Page.vue";
+
+import { Snackbar } from "../../common/components/";
+
+//Metodos
 import { createEmptyLogin, Login, createEmptyLoginError } from "./viewModel";
 import { mapLoginVMToModel } from "./mapper";
 import { validation } from "./validations";
-import { Snackbar } from "../../common/components/";
 
 export default Vue.extend({
   name: "PageLoginContainer",
@@ -52,6 +60,7 @@ export default Vue.extend({
           loginRequest(loginModel)
             .then(() => {
               this.$router.push(baseRoutes.recipe);
+              localStorage.setItem("user", this.login.name);
             })
             .catch((error) => {
               this.openSnackbar = true;

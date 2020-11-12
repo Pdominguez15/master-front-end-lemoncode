@@ -12,11 +12,33 @@ export const baseRoutes = {
 
 export type BaseRoutes = typeof baseRoutes;
 
+function guardMyroute(to, from, next) {
+  let isAuthenticated = false;
+  if (localStorage.getItem("user")) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
+  if (isAuthenticated) {
+  } else {
+    next("/login");
+  }
+}
+
 const routes: RouteConfig[] = [
   { path: baseRoutes.root, redirect: baseRoutes.login },
   { path: baseRoutes.login, component: LoginPageContainer },
-  { path: baseRoutes.recipe, component: RecipeListPageContainer },
-  { path: baseRoutes.edit, component: EditRecipePageContainer, props: true },
+  {
+    path: baseRoutes.recipe,
+    component: RecipeListPageContainer,
+    beforeEnter: guardMyroute,
+  },
+  {
+    path: baseRoutes.edit,
+    component: EditRecipePageContainer,
+    props: true,
+    beforeEnter: guardMyroute,
+  },
 ];
 
 export const router = new Router({

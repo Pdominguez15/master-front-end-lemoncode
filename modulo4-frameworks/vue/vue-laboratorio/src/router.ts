@@ -20,6 +20,7 @@ function guardMyroute(to, from, next) {
     isAuthenticated = false;
   }
   if (isAuthenticated) {
+    next(); // allow to enter route
   } else {
     next("/login");
   }

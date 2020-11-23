@@ -10,7 +10,7 @@ interface LabelProps {
   acceptButton: string;
 }
 
-interface Props {
+export interface Props {
   isOpen: boolean;
   onAccept: () => void;
   onClose: () => void;

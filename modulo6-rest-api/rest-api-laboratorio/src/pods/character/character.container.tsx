@@ -26,8 +26,12 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
   const history = useHistory();
 
   const handleLoadCharacter = async () => {
-    const apiCharacter = await api.getCharacter(id);
-    setCharacter(mapCharacterFromApiToVm(apiCharacter));
+    api
+      .getCharacter(id)
+      .then((result) => setCharacter(mapCharacterFromApiToVm(result)))
+      .catch((error) => {
+        console.log({ error });
+      });
   };
 
   React.useEffect(() => {
@@ -38,12 +42,13 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
 
   const handleSave = async (character: Character) => {
     const apiCharacter = mapCharacterFromVmToApi(character);
-    const success = await api.saveCharacter(apiCharacter);
-    if (success) {
-      history.goBack();
-    } else {
-      alert('Error on save character');
-    }
+
+    api
+      .saveCharacter(apiCharacter)
+      .then((result) => history.goBack())
+      .catch((error) => {
+        alert('Error on save character');
+      });
   };
 
   return <CharacterComponent character={character} onSave={handleSave} />;

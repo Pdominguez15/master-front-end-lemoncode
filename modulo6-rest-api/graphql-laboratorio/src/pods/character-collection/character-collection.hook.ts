@@ -16,9 +16,13 @@ export const useCharacterCollection = () => {
   >([]);
 
   const loadCharacterCollection = () => {
-    getCharacterCollection().then((result) =>
-      setCharacterCollection(mapToCollection(result, mapFromApiToVm))
-    );
+    getCharacterCollection()
+      .then((result) =>
+        setCharacterCollection(mapToCollection(result, mapFromApiToVm))
+      )
+      .catch((error) => {
+        console.log({ error });
+      });
   };
 
   return { characterCollection, loadCharacterCollection };

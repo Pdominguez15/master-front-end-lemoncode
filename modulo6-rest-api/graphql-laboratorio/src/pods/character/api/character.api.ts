@@ -24,7 +24,7 @@ export const getCharacter = async (id: string): Promise<Character> => {
   const resultadoReal = await graphaqlClient.request<GetCharacterCollection>(
     query
   );
-  
+
   //Del server mock
   const queryMock = gql`
    query {
@@ -51,7 +51,6 @@ export const getCharacter = async (id: string): Promise<Character> => {
     return { ...resultadoReal.character, commentary: '' };
   }
 };
-
 
 interface SaveCharacterResponse {
   saveCharacter: boolean;

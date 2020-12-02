@@ -3,5 +3,6 @@ module.exports = {
   preset: 'ts-jest',
   restoreMocks: true,
   moduleDirectories: ['<rootDir>/src', 'node_modules'],
+  modulePathIgnorePatterns: ['cypress'],
   setupFilesAfterEnv: ['<rootDir>/config/test/setup.ts'],
 };
